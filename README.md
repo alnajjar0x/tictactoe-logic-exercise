@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Tic-Tac-Toe: A Logic Analysis Exercise
 
-## Getting Started
+A simple Tic-Tac-Toe game built with React (Next.js) to practice and analyze application logic.
 
-First, run the development server:
+## 🎯 Primary Goal: From Code to Pentesting
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+As a Penetration Tester, this project is an exercise to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Practice Logic:** Implement state management and event sequencing.
+* **Deconstruct Logic:** Understand how an app *should* work to learn how it can be *broken*. This is foundational for finding **Business Logic Vulnerabilities**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 Logic Breakdown
 
-## Learn More
+### 1. State Management (`useState`)
 
-To learn more about Next.js, take a look at the following resources:
+* `cells`: 9-item array tracking each square's state ("" or "circle"/"cross").
+* `go`: String tracking the current player's turn.
+* `winningMessage`: String storing the end-game state (winner or "Draw!").
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Gameplay Logic (in `Cell` component)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Validation:** `handleClick` halts if the game is over or the square is already taken.
+2.  **State Update:** Updates a copy of the `cells` array with the current player's move.
+3.  **Turn Switch:** Swaps the `go` state to the next player.
 
-## Deploy on Vercel
+### 3. Win/Draw Logic (`useEffect`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **Win:** A `useEffect` hook monitors `cells` and checks all `winningCombos` for a 3-in-a-row match.
+* **Draw:** A separate `useEffect` checks if all `cells` are full **AND** no `winningMessage` is set.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Reset Logic
+
+* A "Reset Game" button calls `handleReset` to restore all state variables to their defaults.
+
+---
+
+## 🛠️ Tech Stack
+
+* **React** & **Next.js**
+* **TypeScript**
+* **CSS** (Grid & Flexbox)
+
+---
+
+## 🚀 How to Run Locally
+
+1.  `git clone [YOUR_REPOSITORY_LINK_HERE]`
+2.  `cd [PROJECT_FOLDER_NAME]`
+3.  `npm install`
+4.  `npm run dev`
